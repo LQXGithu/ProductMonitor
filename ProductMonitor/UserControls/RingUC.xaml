@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="ProductMonitor.UserControls.RingUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProductMonitor.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="LayOutGrid">
+        <Ellipse Width="{Binding ElementName=LayOutGrid,Path=ActualWidth}" Height="{Binding ElementName=LayOutGrid,Path=ActualHeight}" Stroke="#22ffffff" StrokeThickness="8" VerticalAlignment="Top"/>
+        <Path x:Name="path" Stroke="Orange" StrokeThickness="7" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+<!--StrokeEndLineCap 是设置终点的帽盖样式。
+效果对比：
+Flat:     |___________|
+Round:    (___________)
+Square:   [___________]
+-->
+        <TextBlock Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Run Text="{Binding PercentValue,RelativeSource={RelativeSource AncestorType=UserControl}, StringFormat={}{0:#}}" FontSize="22"></Run>
+            <Run Text="%"></Run>
+        </TextBlock>
+    </Grid>
+</UserControl>

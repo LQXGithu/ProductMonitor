@@ -1,0 +1,196 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"> 
+
+    <Style TargetType="Button" x:Key="WindowButtons">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="Button" x:Key="WindowButton">
+        <Setter Property="Width" Value="40"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <!--#region 自定义控件模板: Template -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="WindowButton_Border_One" Background="{TemplateBinding Background}">
+                        <iconPacks:PackIconPhosphorIcons Kind="X" Foreground="White" Width="14" Height="14" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="WindowButton_Border_One" Property="Background" Value="Red"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--#endregion-->
+    </Style>
+
+    <Style TargetType="Button" x:Key="WindowsSetterButton">
+        <Setter Property="Foreground" Value="#aaa"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderThickness="1" Background="Transparent" x:Name="SetterButtonName">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                <GradientStop Color="#22ffffff" Offset="0"/>
+                                <GradientStop Color="#77ffffff" Offset="0.5"/>
+                                <GradientStop Color="#22ffffff" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <ContentPresenter/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="SetterButtonName" Property="Background" Value="#11ffffff"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="ItemsControl" x:Key="ProductItems">
+        <!--ItemsControl是个显示数据集合控件可以用它来给属性内部写排列方式-->
+
+        <!--#region 自定义模板: ItemsPanel -->
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"></StackPanel>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <!--#endregion-->
+    </Style>
+    <DataTemplate x:Key="machineCount">
+        <!--也就是说ItemsControl拿到的属性给他绑定到了一个控件的属性，我可以通过ControlItems调整属性的排
+        列顺序，也可以用DataTemplate给些控件UI。[并且从ControlItems获得后会变为集合(枚举char)形式将数据分成
+        多个,让DataTemplate把每个都处理一次],[Text="{Binding (char 隐式转换 string)}"默认绑定到x:key绑定到的属性]
+        -->
+        
+        <Border Width="15" Margin="2,0" Background="#3318aabd">
+            <TextBlock Text="{Binding}" Foreground="White" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Border>
+    </DataTemplate>
+
+    <Style TargetType="ItemsControl" x:Key="WarningPanel">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DataTemplate x:Key="WarningData">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Width="6" Height="6" Background="IndianRed" CornerRadius="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" Text="{Binding Num}" Foreground="#992bedf1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Column="2" Text="{Binding Message}" Foreground="#992bedf1" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="3" Text="{Binding Time}" Foreground="#992bedf1" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="4" Text="{Binding Duration,StringFormat=时长{0}秒}" Foreground="#992bedf1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+    </DataTemplate>
+
+    <Style TargetType="ItemsControl" x:Key="deviceItems">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DataTemplate x:Key="DeviceData">
+        <Border>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding DeviceName}" FontSize="16" Foreground="#ff2bedf1" Margin="0.5"/>
+                <TextBlock Text="{Binding DeviceValue}" FontSize="10" Foreground="#aaffffff" Margin="0.5"/>
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+
+    <Style TargetType="ItemsControl" x:Key="ItemsStaffOutWork">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel VerticalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <DataTemplate x:Key="StaffOutWorkData">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border Width="5" Height="5" CornerRadius="5" Background="Orange"/>
+            <TextBlock Grid.Column="1" Text="{Binding StaffName}" Foreground="#99ffffff" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="2" Text="{Binding Positon}" Foreground="#99ffffff" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="3" Orientation="Horizontal">
+                <!--Border的宽度可能过高超出屏幕让TexBlock看不见,可以试试限制宽度和压缩宽度比例-->
+                <Border Background="#aa2bedf1" Height="3" Width="{Binding OutWorkCount}" MaxWidth="50" Margin="5,0"></Border>
+                <TextBlock Text="{Binding OutWorkCount}" FontSize="9" Foreground="#99ffffff"/>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <Style TargetType="ItemsControl" x:Key="ItemsWorkShop">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="OperateBtnStyle">
+        <Setter Property="Width" Value="40"></Setter>
+        <Setter Property="Background" Value="#11ffffff"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="FontFamily" Value="../Resource/Fonts/#iconfont"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Border x:Name="border">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="#33ffffff"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
